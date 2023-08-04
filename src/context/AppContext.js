@@ -19,6 +19,7 @@ export const AppReducer = (state, action) => {
             return {
                 ...state,
             };
+
             case 'RED_QUANTITY':
                 state.expenses.map((expense)=>{
                     if(expense.name === action.payload.name) {
@@ -52,20 +53,16 @@ export const AppReducer = (state, action) => {
             return {
                 ...state
             }
+
         default:
             return state;
     }
 };
 
-
-
-
-
 // 1. Sets the initial state when the app loads
-
-const initialState  ={
-    expenses:[
-        {id: "Shirt",name: 'Shirt',quantity: 0,unitprice: 500},
+const initialState = {
+    expenses: [
+        { id: "Shirt", name: 'Shirt', quantity: 0, unitprice: 500 },
         { id: "Jeans", name: 'Jeans', quantity: 0, unitprice: 300 },
         { id: "Dress", name: 'Dress', quantity: 0, unitprice: 400 },
         { id: "Dinner set", name: 'Dinner set', quantity: 0, unitprice: 600 },
@@ -73,6 +70,7 @@ const initialState  ={
     ],
     Location: '£'
 };
+
 // 2. Creates the context this is the thing our components import and use to get the state
 export const AppContext = createContext();
 
@@ -81,10 +79,12 @@ export const AppContext = createContext();
 export const AppProvider = (props) => {
     // 4. Sets up the app state. takes a reducer, and an initial state
     const [state, dispatch] = useReducer(AppReducer, initialState);
+
     const totalExpenses = state.expenses.reduce((total, item) => {
         return (total = total + (item.unitprice*item.quantity));
     }, 0);
 state.CartValue = totalExpenses;
+
     return (
         <AppContext.Provider
             value={{
